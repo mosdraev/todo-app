@@ -18,25 +18,22 @@ use Illuminate\Support\Facades\Route;
 // Home page route
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/dashboard', [HomeController::class, 'dashboard'])
-    ->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function() {
 
-Route::get('/create', [TaskController::class, 'create'])
-    ->middleware(['auth'])->name('task');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-Route::post('/store', [TaskController::class, 'store'])
-    ->middleware(['auth'])->name('store');
+    Route::get('/create', [TaskController::class, 'create'])->name('task');
 
-Route::post('/destroy/{id}', [TaskController::class, 'destroy'])
-    ->middleware(['auth'])->name('destroy');
+    Route::post('/store', [TaskController::class, 'store'])->name('store');
 
-Route::post('modify', [TaskController::class, 'modify'])
-    ->middleware(['auth'])->name('modify');
+    Route::post('/destroy/{id}', [TaskController::class, 'destroy'])->name('destroy');
 
-Route::get('view/{id}', [TaskController::class, 'view'])
-    ->middleware(['auth'])->name('view');
+    Route::post('modify', [TaskController::class, 'modify'])->name('modify');
 
-Route::get('update/{id}', [TaskController::class, 'update'])
-    ->middleware(['auth'])->name('update');
+    Route::get('view/{id}', [TaskController::class, 'view'])->name('view');
+
+    Route::get('update/{id}', [TaskController::class, 'update'])->name('update');
+
+});
 
 require __DIR__.'/auth.php';
