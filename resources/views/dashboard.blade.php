@@ -16,20 +16,22 @@
                     <ul class="list-inside sm:list-outside md:list-inside lg:list-outside xl:list-inside">
                         @foreach ($task as $item)
                             <li>
-                                <div class="m-2">
-                                    <div class="border-solid border-2 border-gray-400 lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                                        <div class="mb-8">
-                                            <div class="text-gray-900 font-bold text-xl mb-2">{{ $item->title }}</div>
-                                            <p class="text-gray-700 text-base">{{ $item->description }}</p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <div class="text-sm">
-                                                <p class="text-gray-900 leading-none">{{ $item->user_id }}</p>
-                                                <p class="text-gray-600">Created: {{ $item->created_at->diffForHumans() }}</p>
+                                <a href="/view/{{ $item->id }}">
+                                    <div class="m-2">
+                                        <div class="border-solid border-2 border-gray-400 lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                                            <div class="mb-8">
+                                                <div class="text-gray-900 font-bold text-xl mb-2">{{ $item->title }}</div>
+                                                <p class="text-gray-700 text-base">{{ $item->description }}</p>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="text-sm">
+                                                    <p class="text-gray-900 leading-none">{{ $item->users->name }}</p>
+                                                    <p class="text-gray-600">Created: {{ $item->created_at->diffForHumans() }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </li>
                         @endforeach
                     </ul>

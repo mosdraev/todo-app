@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Task\Task;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public function task()
+    {
+        return $this->hasMany(Task::class, 'user_id', 'id');
+    }
 }

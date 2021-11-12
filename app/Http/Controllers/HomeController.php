@@ -11,7 +11,7 @@ class HomeController extends Controller
     /**
      * Displays home page of the todo application
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class HomeController extends Controller
     /**
      * Display all task of a user in the Dashboard
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function dashboard()
     {
@@ -29,7 +29,7 @@ class HomeController extends Controller
 
         $listTask = $task->where(
             'user_id', Auth::user()->id
-        )->get();
+        )->with('users')->get();
 
         return view('dashboard', [
             'task' => $listTask
